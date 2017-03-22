@@ -4,7 +4,7 @@
 
 ポータル連携用ダミーnode
 
-[動作環境構築](https://bitbucket.org/yakai/lazarus-machine-ubuntu1604/overview)
+[動作環境構築](https://github.com/srpg-lazarus/machine-ubuntu1604)
 
 ### 初期設定 ###
 
@@ -14,8 +14,9 @@
 ```
 #!zsh
 
-cd lazarus-node-test
+cd node-test
 npm install
+vim app.js // MySQLユーザを設定
 forever start app.js
 
 ```

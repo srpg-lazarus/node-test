@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>Socket.IO Test</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="/ws/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <h1>Socket.IO Test</h1>
+    <input type="text" id="msg_input" style="width:200px;" />
+    <button onclick="publishMessage();">発言</button>
+    <div id="msg"></div>
+    <script>
+  var socket = io.connect();
+  socket.on("connected", function(name) { });
+  socket.on("publish", function(data) { addMessage(data.value); });
+  socket.on("named", function(data) { myName = data.name; });
+
+  function start() {
+    socket.emit("connected");
+  }
+
+  function publishMessage() {
+    var textInput = document.getElementById('msg_input');
+    var msg = "[" + myName + "] " + textInput.value;
+    socket.emit("publish", {value: msg});
+    textInput.value = '';
+  }
+
+  function addMessage(msg) {
+    var domMeg = document.createElement('div');
+    domMeg.innerHTML = new Date().toLocaleTimeString() + ' ' + msg;
+    msgArea.appendChild(domMeg);
+  }
+
+  var msgArea = document.getElementById("msg");
+  var myName = '';
+  start();
+    </script>
+
+  </body>
+</html>
